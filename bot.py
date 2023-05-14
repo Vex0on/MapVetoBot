@@ -1,6 +1,6 @@
 import discord
-from discord import app_commands
 from discord.ext import commands
+from discord.ui import View, Button
 
 intents = discord.Intents.default()
 bot = commands.Bot(command_prefix="/", intents=intents)
@@ -16,9 +16,11 @@ async def on_ready():
         print(e)
 
 
-@bot.tree.command(name="hello")
+@bot.tree.command(name="veto-create")
 async def hello(interaction: discord.Interaction):
-    await interaction.response.send_message(f'Hey {interaction.user.mention}! This is a slash command', ephemeral=False)
+    embed = discord.Embed(title="Veto BOT", description="Tutaj będziesz mieć możliwość przeprowadzenia veto map", color=0x0099FF)
+    embed.set_author(name="Veto BOT", icon_url="https://i.imgur.com/AfFp7pu.png", url="https://discord.js.org")
+    await interaction.response.send_message(embed=embed, ephemeral=True)
 
 with open('config.txt', 'r') as file:
     token = file.read().strip()
